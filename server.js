@@ -3,7 +3,9 @@ import cors from "cors";
 import { db } from "./db.js";
 
 const app = express();
-const PORT = 5050;
+// Render (and most PaaS hosts) expose the port to bind to via $PORT.
+// Fall back to 5050 for local development.
+const PORT = process.env.PORT || 5050;
 
 app.use(cors());
 app.use(express.json());
@@ -253,4 +255,8 @@ app.patch("/api/issues/:id/status", (req, res) => {
   res.json(stmt.issueById.get(req.params.id));
 });
 
-app.listen(PORT, () => console.log(`CampusFeedback API (SQLite): http://localhost:${PORT}`));
+// Serve the frontend (static HTML/JS/CSS) from / so the API and the UI
+// share one origin — no CORS, no hardcoded localhost URL, works on Render.
+app.use(express.static("frontend"));
+
+app.listen(PORT, () => console.log(`CampusFeedback (SQLite) listening on :${PORT}`));

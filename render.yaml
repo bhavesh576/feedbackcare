@@ -1,0 +1,16 @@
+# Render Blueprint for the CampusFeedback web service.
+# The app now lives at the repo root, so Render's defaults (build: npm install,
+# start: npm start) work without any dashboard configuration.
+services:
+  - type: web
+    name: feedbackcare
+    runtime: node
+    plan: free
+    region: singapore   # change if your users are elsewhere
+    buildCommand: npm install
+    startCommand: npm start
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 22.22.0
+    healthCheckPath: /api/health
