@@ -1,0 +1,8 @@
+node_modules/
+
+# SQLite database (created/seeded at runtime; Render's disk is ephemeral)
+campus.db
+campus.db-wal
+campus.db-shm
+
+npm-debug.log*

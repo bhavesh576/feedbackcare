@@ -1,4 +1,6 @@
-const API_BASE = "http://localhost:5050/api";
+// Relative base so the frontend works against whatever origin serves it
+// (local dev at http://localhost:5050 and the deployed app alike).
+const API_BASE = "/api";
 
 async function apiRequest(path, options = {}) {
   const response = await fetch(`${API_BASE}${path}`, {
