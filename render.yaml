@@ -11,6 +11,11 @@ services:
     startCommand: npm start
     autoDeploy: true
     envVars:
+      # Pin to the major line (not an exact patch like 22.22.0). An exact
+      # patch can fail the build with "Version '22.22.0' not found" if
+      # Render's Node mirror hasn't published it yet. "22" always resolves
+      # to the latest 22.x, which satisfies package.json's engines (>=22.5.0)
+      # and ships node:sqlite (used by db.js) unflagged since 22.13.
       - key: NODE_VERSION
-        value: 22.22.0
+        value: "22"
     healthCheckPath: /api/health
